@@ -1,17 +1,15 @@
-import Navbar from "./components/Navbar";
-import Menu from "./components/Menu";
-import Chatbot from "./components/Chatbot";
-import Footer from "./components/Footer";
+import { useEffect, useState } from "react";
+import api from "./api";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Menu />
-      <Chatbot />
-      <Footer />
-    </>
-  );
+  const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    api.get("/hello")
+       .then(res => setMsg(res.data.message));
+  }, []);
+
+  return <h1>{msg}</h1>;
 }
 
 export default App;
